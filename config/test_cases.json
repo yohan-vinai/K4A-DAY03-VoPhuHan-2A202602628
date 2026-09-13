@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Để nhờ bạn đặt phòng họp, tôi cần cung cấp thông tin gì?",
+    "expected_behavior": "Agent hướng dẫn cung cấp thời gian, số người và thiết bị cần dùng; không gọi bất kỳ tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Có phòng nào trống từ 14:00 đến 15:00 ngày 15/09/2026, đủ 8 người và có máy chiếu không?",
+    "expected_behavior": "Agent gọi find_available_rooms với thời gian 14:00–15:00 ngày 15/09/2026, số người 8 và thiết bị máy chiếu; liệt kê phòng đáp ứng đủ điều kiện dựa trên kết quả tool, không tạo booking. Dữ liệu giả lập cần có ít nhất một phòng phù hợp.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "room_booking",
+    "question": "Đặt phòng A cho tôi từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "expected_behavior": "Với dữ liệu giả lập phòng A trống trong khung giờ yêu cầu, Agent gọi book_room với đúng phòng A và thời gian 09:00–10:00 ngày 15/09/2026; chỉ xác nhận thành công và trả mã booking sau khi tool xác nhận tạo booking thành công.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "expected_behavior": "Với dữ liệu giả lập có ít nhất một phòng phù hợp, Agent gọi find_available_rooms theo đúng điều kiện, lấy mã phòng từ kết quả rồi gọi book_room cho phòng đó trong cùng khung giờ; xác nhận theo kết quả đặt phòng, không tự bịa mã phòng hoặc mã booking.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Đặt phòng B cho tôi từ 10:30 đến 11:30 ngày 15/09/2026.",
+    "expected_behavior": "Với dữ liệu giả lập phòng B đã được đặt từ 10:00 đến 11:00 ngày 15/09/2026, Agent gọi book_room cho thời gian yêu cầu và nhận kết quả từ chối do giao nhau một phần với lịch có sẵn; thông báo không đặt được, không tạo booking mới và giữ nguyên booking hiện có.",
+    "complexity": "Medium"
+  }
+]

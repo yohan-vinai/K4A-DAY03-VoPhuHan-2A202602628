@@ -1,29 +1,308 @@
 [
   {
+    "query": "Để nhờ bạn đặt phòng họp, tôi cần cung cấp thông tin gì?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:17.785723+07:00",
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
+    "action_type": "LLM_RESPONSE",
+    "decision": "text",
+    "latency_ms": 2228.44,
+    "test_case_id": "TC01"
   },
   {
+    "query": "Để nhờ bạn đặt phòng họp, tôi cần cung cấp thông tin gì?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:17.785723+07:00",
     "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "action_type": "FINAL_ANSWER",
+    "output": "Để tôi có thể hỗ trợ bạn đặt phòng họp, bạn vui lòng cung cấp các thông tin sau:\n\n1. **Thời gian**: Ngày, giờ bắt đầu và giờ kết thúc (ví dụ: ngày 15/09/2026, từ 14:00 đến 15:00).\n2. **Số lượng người tham dự**: Để tôi tìm phòng có sức chứa phù hợp.\n3. **Thiết bị yêu cầu**: Danh sách thiết bị cần thiết (ví dụ: máy chiếu, bảng trắng, hoặc [] nếu không cần thiết bị).\n\nSau khi có đủ thông tin, tôi sẽ giúp bạn tìm và đặt phòng theo yêu cầu!",
+    "test_case_id": "TC01"
+  },
+  {
+    "query": "Có phòng nào trống từ 14:00 đến 15:00 ngày 15/09/2026, đủ 8 người và có máy chiếu không?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:20.014289+07:00",
+    "step": 1,
+    "action_type": "LLM_RESPONSE",
+    "decision": "tool_calls",
+    "latency_ms": 1757.46,
+    "test_case_id": "TC02"
+  },
+  {
+    "query": "Có phòng nào trống từ 14:00 đến 15:00 ngày 15/09/2026, đủ 8 người và có máy chiếu không?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:20.014289+07:00",
+    "step": 1,
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "find_available_rooms",
     "arguments": {
-      "student_id": "SV2026001"
+      "equipment": [
+        "máy chiếu"
+      ],
+      "start_time": "2026-09-15T14:00:00+07:00",
+      "attendees": 8,
+      "end_time": "2026-09-15T15:00:00+07:00"
     },
-    "observation": {},
-    "latency_ms": 799.12
+    "observation": {
+      "status": "SUCCESS",
+      "rooms": [
+        {
+          "room_id": "A",
+          "capacity": 8,
+          "equipment": [
+            "máy chiếu",
+            "bảng trắng"
+          ]
+        },
+        {
+          "room_id": "B",
+          "capacity": 12,
+          "equipment": [
+            "máy chiếu"
+          ]
+        }
+      ]
+    },
+    "latency_ms": 0.21,
+    "test_case_id": "TC02"
   },
   {
+    "query": "Có phòng nào trống từ 14:00 đến 15:00 ngày 15/09/2026, đủ 8 người và có máy chiếu không?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:20.014289+07:00",
     "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "action_type": "LLM_RESPONSE",
+    "decision": "text",
+    "latency_ms": 1889.06,
+    "test_case_id": "TC02"
+  },
+  {
+    "query": "Có phòng nào trống từ 14:00 đến 15:00 ngày 15/09/2026, đủ 8 người và có máy chiếu không?",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:20.014289+07:00",
+    "step": 2,
     "action_type": "FINAL_ANSWER",
-    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
-    "latency_ms": 10.0
+    "output": "Có 2 phòng trống đáp ứng yêu cầu của bạn:\n- Phòng A: sức chứa 8 người, có máy chiếu và bảng trắng.\n- Phòng B: sức chứa 12 người, có máy chiếu.\n\nBạn muốn đặt phòng nào không?",
+    "test_case_id": "TC02"
+  },
+  {
+    "query": "Đặt phòng A cho tôi từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:23.664344+07:00",
+    "step": 1,
+    "action_type": "LLM_RESPONSE",
+    "decision": "tool_calls",
+    "latency_ms": 3322.33,
+    "test_case_id": "TC03"
+  },
+  {
+    "query": "Đặt phòng A cho tôi từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:23.664344+07:00",
+    "step": 1,
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "book_room",
+    "arguments": {
+      "end_time": "2026-09-15T10:00:00+07:00",
+      "start_time": "2026-09-15T09:00:00+07:00",
+      "room_id": "A"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "booking_id": "BK-53ab528e71fb",
+      "room_id": "A",
+      "start_time": "2026-09-15T09:00:00+07:00",
+      "end_time": "2026-09-15T10:00:00+07:00",
+      "message": "Đặt phòng A thành công từ 2026-09-15T09:00:00+07:00 đến 2026-09-15T10:00:00+07:00."
+    },
+    "latency_ms": 0.35,
+    "test_case_id": "TC03"
+  },
+  {
+    "query": "Đặt phòng A cho tôi từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:23.664344+07:00",
+    "step": 2,
+    "action_type": "LLM_RESPONSE",
+    "decision": "text",
+    "latency_ms": 2041.19,
+    "test_case_id": "TC03"
+  },
+  {
+    "query": "Đặt phòng A cho tôi từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:23.664344+07:00",
+    "step": 2,
+    "action_type": "FINAL_ANSWER",
+    "output": "Đặt phòng thành công. Mã đặt phòng của bạn là BK-53ab528e71fb. Phòng A đã được giữ cho bạn từ 09:00 đến 10:00 ngày 15/09/2026.",
+    "test_case_id": "TC03"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 1,
+    "action_type": "LLM_RESPONSE",
+    "decision": "tool_calls",
+    "latency_ms": 1742.84,
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 1,
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "find_available_rooms",
+    "arguments": {
+      "attendees": 8,
+      "end_time": "2026-09-15T15:00:00+07:00",
+      "start_time": "2026-09-15T14:00:00+07:00",
+      "equipment": [
+        "máy chiếu"
+      ]
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "rooms": [
+        {
+          "room_id": "A",
+          "capacity": 8,
+          "equipment": [
+            "máy chiếu",
+            "bảng trắng"
+          ]
+        },
+        {
+          "room_id": "B",
+          "capacity": 12,
+          "equipment": [
+            "máy chiếu"
+          ]
+        }
+      ]
+    },
+    "latency_ms": 0.17,
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 2,
+    "action_type": "LLM_RESPONSE",
+    "decision": "tool_calls",
+    "latency_ms": 1677.48,
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 2,
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "book_room",
+    "arguments": {
+      "end_time": "2026-09-15T15:00:00+07:00",
+      "room_id": "A",
+      "start_time": "2026-09-15T14:00:00+07:00"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "booking_id": "BK-07769ec79a0e",
+      "room_id": "A",
+      "start_time": "2026-09-15T14:00:00+07:00",
+      "end_time": "2026-09-15T15:00:00+07:00",
+      "message": "Đặt phòng A thành công từ 2026-09-15T14:00:00+07:00 đến 2026-09-15T15:00:00+07:00."
+    },
+    "latency_ms": 0.13,
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 3,
+    "action_type": "LLM_RESPONSE",
+    "decision": "text",
+    "latency_ms": 1852.54,
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Tìm và đặt giúp tôi một phòng cho 8 người, có máy chiếu, từ 14:00 đến 15:00 ngày 15/09/2026. Phòng nào đáp ứng cũng được.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:29.028896+07:00",
+    "step": 3,
+    "action_type": "FINAL_ANSWER",
+    "output": "Đã đặt phòng thành công. Thông tin cụ thể:\n- Mã phòng: A\n- Mã đặt phòng: BK-07769ec79a0e\n- Thời gian: 14:00 - 15:00, ngày 15/09/2026.",
+    "test_case_id": "TC04"
+  },
+  {
+    "query": "Đặt phòng B cho tôi từ 10:30 đến 11:30 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:34.302558+07:00",
+    "step": 1,
+    "action_type": "LLM_RESPONSE",
+    "decision": "tool_calls",
+    "latency_ms": 1547.24,
+    "test_case_id": "TC05"
+  },
+  {
+    "query": "Đặt phòng B cho tôi từ 10:30 đến 11:30 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:34.302558+07:00",
+    "step": 1,
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "book_room",
+    "arguments": {
+      "end_time": "2026-09-15T11:30:00+07:00",
+      "room_id": "B",
+      "start_time": "2026-09-15T10:30:00+07:00"
+    },
+    "observation": {
+      "status": "CONFLICT",
+      "message": "Phòng B đã có booking trùng khung giờ yêu cầu."
+    },
+    "latency_ms": 0.12,
+    "test_case_id": "TC05"
+  },
+  {
+    "query": "Đặt phòng B cho tôi từ 10:30 đến 11:30 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:34.302558+07:00",
+    "step": 2,
+    "action_type": "LLM_RESPONSE",
+    "decision": "text",
+    "latency_ms": 2046.38,
+    "test_case_id": "TC05"
+  },
+  {
+    "query": "Đặt phòng B cho tôi từ 10:30 đến 11:30 ngày 15/09/2026.",
+    "provider": "GeminiProvider",
+    "model": "gemini-3.1-flash-lite",
+    "timestamp": "2026-09-13T10:43:34.302558+07:00",
+    "step": 2,
+    "action_type": "FINAL_ANSWER",
+    "output": "Phòng B hiện đã bị trùng lịch vào khung giờ bạn yêu cầu. Bạn vui lòng chọn khung giờ khác hoặc phòng khác nhé.",
+    "test_case_id": "TC05"
   }
 ]
